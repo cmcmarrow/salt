@@ -2,8 +2,6 @@
 """
     Test chcp
 """
-import subprocess
-import os
 
 
 from tests.support.unit import TestCase, skipIf
@@ -14,15 +12,15 @@ from salt.utils import platform
 @skipIf(not platform.is_windows(), "Windows only tests!")
 class CHCPTest(TestCase):
     """
-    Test case for salt.utils.cache.ContextCache
+    Test case for salt.utils.chcp
     """
-    def __init__(self, *args,  **kwargs):
+    def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
 
         self._chcp_code = None
         try:
             self._chcp_code = chcp.chcp()
-        except Exception as exc:
+        except BaseException as exc:
             self._chcp_code = exc
 
     def setUp(self):

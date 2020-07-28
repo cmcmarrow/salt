@@ -22,7 +22,6 @@ import sys
 import tempfile
 import time
 import traceback
-import string
 
 import salt.grains.extra
 
@@ -288,7 +287,7 @@ def _run(
     bg=False,
     encoded_cmd=False,
     success_retcodes=None,
-    chcp_code=437,
+    windows_codepage=437,
     **kwargs
 ):
     """
@@ -342,8 +341,8 @@ def _run(
             raise CommandExecutionError(msg)
     elif use_vt:  # Memozation so not much overhead
         raise CommandExecutionError("VT not available on windows")
-    elif chcp_code is not None:
-        salt.utils.chcp.chcp(chcp_code)
+    elif windows_codepage is not None:
+        salt.utils.chcp.chcp(windows_codepage)
 
     if shell.lower().strip() == "powershell":
         # Strip whitespace
@@ -1137,6 +1136,14 @@ def run(
         present in the ``stdin`` value to newlines.
 
       .. versionadded:: 2019.2.0
+
+    :param int windows_codepage: 65001
+        Only applies to Windows: the minion uses `C:\Windows\System32\chcp.com` to 
+        verify or set the code page before he excutes the command `cmd`. 
+        Code page 65001 corresponds with UTF-8 and allows international localization of Windows.
+
+      .. versionadded:: 3002
+
 
     CLI Example:
 
