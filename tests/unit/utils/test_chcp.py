@@ -15,13 +15,11 @@ class CHCPTest(TestCase):
     Test case for salt.utils.chcp
     """
     def __init__(self, *args, **kwargs):
+        # Stores the initial code page for _reset_code_page()
+        # Intentionally does not catch any exception, to find out which that would be.
+        # That exception would then be added to cmdmod.py
         super().__init__(*args, **kwargs)
-
-        self._chcp_code = None
-        try:
-            self._chcp_code = chcp.chcp()
-        except BaseException as exc:
-            self._chcp_code = exc
+        self._chcp_code = chcp.chcp()
 
     def setUp(self):
         self._reset_code_page()
@@ -30,9 +28,6 @@ class CHCPTest(TestCase):
         self._reset_code_page()
 
     def _reset_code_page(self):
-        if isinstance(self._chcp_code, Exception):
-            raise self._chcp_code
-
         chcp.chcp(self._chcp_code, True)
 
     def test_get_and_set_code_page(self):
