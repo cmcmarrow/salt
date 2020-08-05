@@ -25,14 +25,7 @@ class CHCPTest(TestCase):
         chcp.chcp(self._chcp_code)
 
     def tearDown(self):
-<<<<<<< HEAD
         chcp.chcp(self._chcp_code)
-=======
-        self._reset_code_page()
-
-    def _reset_code_page(self):
-        chcp.chcp(self._chcp_code, True)
->>>>>>> 8601cdc64696b2e542abd35e8c1a7b1eb6d9e137
 
     def test_get_and_set_code_page(self):
         self.assertEqual(self._chcp_code, chcp.chcp())
