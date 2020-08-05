@@ -35,17 +35,8 @@ def chcp(page_id=None, raise_error=False):
 
     # change or get code page
     try:
-<<<<<<< HEAD
         chcp_process = subprocess.Popen("chcp.com {}".format(page_id), stdout=subprocess.PIPE, stderr=subprocess.PIPE)
     except (FileNotFoundError, OSError, ValueError):
-=======
-        chcp_process = subprocess.Popen(
-            "chcp.com {}".format(page_id),
-            stdout=subprocess.PIPE,
-            stderr=subprocess.PIPE,
-        )
-    except FileNotFoundError:
->>>>>>> 8601cdc64696b2e542abd35e8c1a7b1eb6d9e137
         log.error("Code Page was not found!")
         return ""
 
